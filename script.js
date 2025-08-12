@@ -153,6 +153,62 @@
             }
         }
 
+        //faq section
+
+        document.addEventListener('DOMContentLoaded', () => {
+          const toggles = document.querySelectorAll('.faq-toggle');
+        
+          toggles.forEach(btn => {
+            const panelId = btn.getAttribute('aria-controls');
+            const panel = document.getElementById(panelId);
+        
+            // ensure panels start hidden for ARIA consistency
+            panel.hidden = true;
+        
+            btn.addEventListener('click', () => {
+              const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        
+              if (isOpen) {
+                // collapse
+                const curHeight = panel.scrollHeight;
+                panel.style.height = curHeight + 'px'; // set current height to animate from
+                panel.style.overflow = 'hidden'; // prevent content from peeking
+                requestAnimationFrame(() => {
+                  panel.style.height = '0px';
+                  panel.classList.remove('visible');
+                });
+        
+                panel.addEventListener('transitionend', function handler() {
+                  panel.hidden = true;
+                  panel.style.height = '';
+                  panel.style.overflow = ''; // reset overflow
+                  panel.removeEventListener('transitionend', handler);
+                });
+        
+                btn.setAttribute('aria-expanded', 'false');
+              } else {
+                // expand
+                panel.hidden = false;
+                const targetH = panel.scrollHeight + 'px';
+                panel.style.height = '0px';
+                panel.style.overflow = 'hidden'; 
+                requestAnimationFrame(() => {
+                  panel.classList.add('visible');
+                  panel.style.height = targetH;
+                });
+        
+                panel.addEventListener('transitionend', function handler() {
+                  panel.style.height = '';
+                  panel.style.overflow = ''; // reset overflow
+                  panel.removeEventListener('transitionend', handler);
+                });
+        
+                btn.setAttribute('aria-expanded', 'true');
+              }
+            });
+          });
+        });        
+
         // Generate Floating Particles
         function generateParticles() {
             const particlesContainer = document.getElementById('particlesContainer');

@@ -1570,6 +1570,103 @@
             background-color: #fff;
         }
 
+        /* FAQ */
+        .faq-section {
+            max-width: 880px;
+            height: 500px;
+            margin: 2.5rem auto;
+            padding: 1.5rem;
+            color: #e6eef3;
+          }
+          
+          .faq-title {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+            letter-spacing: -0.02em;
+          }
+          
+          .faq-list {
+            display: grid;
+            gap: 0.9rem;
+          }
+          
+          .faq-item {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border-radius: var(--radius);
+            box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.03);
+        }        
+          
+          .faq-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: transparent;
+            border: 0;
+            padding: 1rem 1.1rem;
+            cursor: pointer;
+            color: #e6eef3;
+            font-size: 1rem;
+            transition: background var(--transition);
+          }
+          .faq-toggle:hover {
+            background: rgba(255,255,255,0.01);
+          }
+          
+          .faq-question {
+            display: block;
+            text-align: left;
+          }
+          
+          .faq-arrow {
+            transition: transform var(--transition);
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-left: 1rem;
+          }
+          
+          .faq-toggle[aria-expanded="true"] .faq-arrow {
+            transform: rotate(180deg);
+          }
+          
+          .faq-panel {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 1.1rem;
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            will-change: max-height, opacity;
+            transition: max-height var(--transition), opacity var(--transition), padding var(--transition);
+          }
+          
+          .faq-panel.visible {
+            max-height: 500px;
+            padding: 0.5rem 1.1rem 1rem 1.1rem;
+            opacity: 1;
+            pointer-events: auto;
+          }
+          
+          .faq-panel[hidden] {
+            max-height: 0;
+            padding: 0 1.1rem;
+            opacity: 0;
+            pointer-events: none;
+          }
+          
+          @media (max-width: 600px) {
+            .faq-section {
+              padding: 1rem;
+            }
+            .faq-toggle {
+              padding: 0.9rem;
+            }
+          }
+          
+
         /* Our Team */
         .contact-form h2 {
             text-align: center;

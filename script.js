@@ -162,17 +162,42 @@
             const panelId = btn.getAttribute('aria-controls');
             const panel = document.getElementById(panelId);
         
-            // ensure panels start hidden for ARIA consistency
+            // Ensure panels start hidden for ARIA consistency
             panel.hidden = true;
         
             btn.addEventListener('click', () => {
               const isOpen = btn.getAttribute('aria-expanded') === 'true';
         
+              // 🔹 Close all other open FAQs first
+              toggles.forEach(otherBtn => {
+                if (otherBtn !== btn && otherBtn.getAttribute('aria-expanded') === 'true') {
+                  const otherPanelId = otherBtn.getAttribute('aria-controls');
+                  const otherPanel = document.getElementById(otherPanelId);
+        
+                  const curHeight = otherPanel.scrollHeight;
+                  otherPanel.style.height = curHeight + 'px';
+                  otherPanel.style.overflow = 'hidden';
+                  requestAnimationFrame(() => {
+                    otherPanel.style.height = '0px';
+                    otherPanel.classList.remove('visible');
+                  });
+        
+                  otherPanel.addEventListener('transitionend', function handler() {
+                    otherPanel.hidden = true;
+                    otherPanel.style.height = '';
+                    otherPanel.style.overflow = '';
+                    otherPanel.removeEventListener('transitionend', handler);
+                  });
+        
+                  otherBtn.setAttribute('aria-expanded', 'false');
+                }
+              });
+        
               if (isOpen) {
-                // collapse
+                // Collapse current
                 const curHeight = panel.scrollHeight;
-                panel.style.height = curHeight + 'px'; // set current height to animate from
-                panel.style.overflow = 'hidden'; // prevent content from peeking
+                panel.style.height = curHeight + 'px';
+                panel.style.overflow = 'hidden';
                 requestAnimationFrame(() => {
                   panel.style.height = '0px';
                   panel.classList.remove('visible');
@@ -181,17 +206,17 @@
                 panel.addEventListener('transitionend', function handler() {
                   panel.hidden = true;
                   panel.style.height = '';
-                  panel.style.overflow = ''; // reset overflow
+                  panel.style.overflow = '';
                   panel.removeEventListener('transitionend', handler);
                 });
         
                 btn.setAttribute('aria-expanded', 'false');
               } else {
-                // expand
+                // Expand current
                 panel.hidden = false;
                 const targetH = panel.scrollHeight + 'px';
                 panel.style.height = '0px';
-                panel.style.overflow = 'hidden'; 
+                panel.style.overflow = 'hidden';
                 requestAnimationFrame(() => {
                   panel.classList.add('visible');
                   panel.style.height = targetH;
@@ -199,7 +224,7 @@
         
                 panel.addEventListener('transitionend', function handler() {
                   panel.style.height = '';
-                  panel.style.overflow = ''; // reset overflow
+                  panel.style.overflow = '';
                   panel.removeEventListener('transitionend', handler);
                 });
         
@@ -207,7 +232,8 @@
               }
             });
           });
-        });        
+        });
+             
 
         // Generate Floating Particles
         function generateParticles() {

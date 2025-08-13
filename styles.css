@@ -1634,13 +1634,25 @@
             text-align: left;
           }
 
-          .faq-panel a:active{
-            color: #00ccff;
+          .faq-link {
+            color: #00ccff; 
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
           }
-
-          .faq-panel a:visited{
-            color: #fc8def;
+          
+          .faq-link:visited {
+            color: #00ccff; 
           }
+          
+          .faq-link:hover {
+            color: #00a3cc; 
+          }
+          
+          .faq-link:active {
+            color: #0088aa; 
+          }
+          
           
           .faq-arrow {
             transition: transform var(--transition);

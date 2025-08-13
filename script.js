@@ -299,7 +299,7 @@
             let flipdown = new FlipDown(timer_)
                 .start()
                 .ifEnded(() => {
-                    document.querySelector(".flipdown").innerHTML = `<h2>Timer is ended</h2>`;
+                    document.querySelector(".flipdown").innerHTML = `<h2 class="countdown-end">We are LIVE!</h2><br><h4 class="countdown-end-tag">Head to the venue and be part of the action.</h4>`;
                 })
         })
 
@@ -581,39 +581,6 @@ function appendChildren(parent, children) {
   });
 }
 
-        //gallery swiperJS
-        document.addEventListener('DOMContentLoaded', function () {
-            var swiper = new Swiper('.gallery-container', {
-
-            loop: true, 
-            spaceBetween: 30,
-            // pagination
-            pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-            },
-            
-            //navigation
-            navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-            },
-
-            //responsive breakouts
-            breakpoints: {
-                0: {
-                    slidesPerView: 1
-                },
-                768: {
-                    slidesPerView: 2
-                },
-                1024: {
-                    slidesPerView: 3
-                }
-            }
-        });
-        });
-
         // Interactive mouse glow effect (throttled for performance)
         let mouseTimer;
         document.addEventListener('mousemove', (e) => {
@@ -636,7 +603,7 @@ function appendChildren(parent, children) {
             }
         });
 
-        // Add a glow that follows the cursor (desktop only)
+        // Glow that follows the cursor (desktop only)
         if (window.innerWidth > 768) {
             const cursorGlow = document.createElement('div');
             cursorGlow.style.cssText = `
@@ -762,34 +729,3 @@ function appendChildren(parent, children) {
             }
         });
         
-
-        // Contact form submission
-        document.querySelector('.btn-submit').addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            if (name && email && message) {
-                // Simulate form submission
-                this.textContent = 'TRANSMITTING...';
-                this.style.background = 'linear-gradient(135deg, var(--primary-cyan), var(--primary-pink))';
-                
-                setTimeout(() => {
-                    this.textContent = 'TRANSMISSION COMPLETE';
-                    this.style.background = 'var(--primary-cyan)';
-                    
-                    // Clear form
-                    document.getElementById('name').value = '';
-                    document.getElementById('email').value = '';
-                    document.getElementById('message').value = '';
-                    
-                    // Reset button after 3 seconds
-                    setTimeout(() => {
-                        this.textContent = 'Transmit Message';
-                        this.style.background = '';
-                    }, 3000);
-                }, 2000);
-            }
-        });

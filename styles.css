@@ -658,14 +658,34 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
           }
 
+          /* Default: hidden on desktop */
+.hero-mobile-logo {
+    display: none;
+    max-height: clamp(60px, 8vw, 80px);
+    width: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 6px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 10px auto;   /* center it */
+  }
+  
+  /* Show only on screens < 1024px */
+  @media (max-width: 1024px) {
+    .hero-mobile-logo {
+      display: block;
+    }
+  
+  }
+    
+
           @media (max-width: 1024px) {
             .nmims-logo {
               display: none !important;
             }
             
           }
-          
-          
           
 
         @keyframes blink {

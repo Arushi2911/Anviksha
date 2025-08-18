@@ -675,11 +675,13 @@
   @media (max-width: 1024px) {
     .hero-mobile-logo {
       display: block;
+      width: 12rem;
+      max-height: max-content;
+      margin-bottom: 15px;
     }
   
   }
     
-
           @media (max-width: 1024px) {
             .nmims-logo {
               display: none !important;
